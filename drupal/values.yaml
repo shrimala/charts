@@ -26,7 +26,6 @@ ingress:
   annotations:
     ingress.kubernetes.io/rewrite-target: /
     kubernetes.io/ingress.class: "gce"
-    kubernetes.io/ingress.global-static-ip-name: "your-static-ip-name"
 
 secrets:
     hashsalt: "template-hash-salt"
