@@ -22,7 +22,9 @@ mariadb:
     password: "{{ randAlphaNum 10 }}" # pass in a value to your helm chart to override this
 
 ingress:
-  hostname: "silta.wdr.io"
+  hostname: "35.201.117.136.nip.io"
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: drupal-ip
 
 secrets:
     hashsalt: "template-hash-salt"
