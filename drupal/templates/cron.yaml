@@ -16,9 +16,9 @@ spec:
             args:
             - {{ .Values.commands.cron | quote }}
 {{ include "drupal.drupal-container" . | indent 12 }}
-      {{- if .Values.image.pullSecrets }}
+      {{- if .Values.secrets.imagePullSecrets }}
           imagePullSecrets:
-          {{- range .Values.image.pullSecrets }}
+          {{- range .Values.secrets.imagePullSecrets }}
             - name: {{ . }}
           {{- end}}
           {{- end }}  
