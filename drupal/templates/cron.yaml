@@ -12,10 +12,9 @@ spec:
         spec:
           containers:
           - name: drupal-cron
-            image: "{{ .Values.drupal.image }}"
-            command:
-            - drush
-            - cron
+            command: ["/bin/sh", "-c"]
+            args:
+            - {{ .Values.commands.cron | quote }}
 {{ include "drupal.drupal-container" . | indent 12 }}
           imagePullSecrets:
           - name: gcr
