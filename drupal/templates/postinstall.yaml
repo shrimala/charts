@@ -18,9 +18,11 @@ spec:
         args:
         - {{ .Values.commands.postinstall | quote }}
 {{ include "drupal.drupal-container" . | indent 8 }}
+      {{- if .Values.secrets.imagePullSecrets }}
       imagePullSecrets:
-        {{- range $key, $value := .Values.secrets.imagePullSecrets }}
-        {{ $key }}: {{ $value | quote }}
-        {{- end }}
+      {{- range .Values.secrets.imagePullSecrets }}
+        - name: {{ . }}
+      {{- end}}
+      {{- end }}
       volumes:
 {{ include "drupal.drupal-files-volume" . | indent 6 }}
