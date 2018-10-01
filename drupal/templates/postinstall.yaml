@@ -18,7 +18,6 @@ spec:
         args:
         - {{ .Values.commands.postinstall | quote }}
 {{ include "drupal.drupal-container" . | indent 8 }}
-      imagePullSecrets:
-      - name: gcr
+      imagePullSecrets: {{ .Values.secrets.imagePullSecrets }}
       volumes:
 {{ include "drupal.drupal-files-volume" . | indent 6 }}
