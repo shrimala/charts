@@ -2,7 +2,7 @@
 {{- define "drupal.drupal-container" -}}
 image: {{ .Values.drupal.image | quote }}
 env:
-{{/* Do not insert mariadb env variables if mariadb is disabled*/}}
+{{/* Do not insert mariadb env variables if mariadb is disabled */}}
 {{ if or (not (hasKey .Values.mariadb "enabled")) (eq (coalesce .Values.mariadb.enabled false) true) }}
 - name: DB_USER
   value: "{{ .Values.mariadb.db.user }}"
