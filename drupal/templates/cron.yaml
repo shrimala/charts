@@ -12,34 +12,11 @@ spec:
         spec:
           containers:
           - name: drupal-cron
-<<<<<<< HEAD
             command: ["/bin/sh", "-c"]
             args:
             - {{ .Values.commands.cron | quote }}
 {{ include "drupal.drupal-container" . | indent 12 }}
-          imagePullSecrets:
-          - name: gcr
+          imagePullSecrets: {{ .Values.secrets.imagePullSecrets }}        
           volumes:
 {{ include "drupal.drupal-files-volume" . | indent 10 }}
-=======
-            image: "{{ .Values.drupal.image }}"
-            command:
-            - drush
-            - cron
-            env:
-            - name: PHP_FPM_CLEAR_ENV
-              value: "no"
-            - name: DB_USER
-              value: "{{ .Values.mariadb.db.user }}"
-            - name: DB_NAME
-              value: "{{ .Values.mariadb.db.name }}"
-            - name: DB_HOST
-              value: "{{ .Release.Name }}-mariadb"
-            - name: DB_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: "{{ .Release.Name }}-mariadb"
-                  key: mariadb-password
-          imagePullSecrets: {{ .Values.secrets.imagePullSecrets }}        
->>>>>>> imagePullSecret
           restartPolicy: OnFailure
