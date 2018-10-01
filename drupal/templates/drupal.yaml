@@ -64,6 +64,9 @@ spec:
         - name: drupal-files-volume
           mountPath: /var/www/html/web/sites/default/files
 
-      imagePullSecrets: {{ .Values.secrets.imagePullSecrets }}
+      imagePullSecrets:
+        {{- range $key, $value := .Values.secrets.imagePullSecrets }}
+        {{ $key }}: {{ $value | quote }}
+        {{- end }}
       volumes:
 {{ include "drupal.drupal-files-volume" . | indent 6 }}
